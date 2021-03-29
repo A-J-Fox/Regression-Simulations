@@ -39,16 +39,32 @@ gen y_hat3 = y_hat^3
 reg u_hat y_hat2 y_hat3
 
 * Breusch-Pagan test (low p-value: reject null -> evidence for heteroskedasticity)
+reg u_hat2 x
+test x=0
+* or using a package
+quietly reg y x
 hettest 
 
-* White test 
+* "special" White test (Wooldridge)
+reg u_hat2 y_hat y_hat2
+test y_hat=y_hat2=0
+
+* or use a package
+quietly reg y x
 estat imtest, white
+* alternative whitetst package
+whitetst
 
 * Szroeter test 
 szroeter x
 
-* alternative whitetest package
-whitetst
+* comparing solutions
+reg y x
+reg y x, robust
+reg y x [aweight=x]
+wls0 y x, wvars(x) type(abse) robust graph
+
+
 
 
 
