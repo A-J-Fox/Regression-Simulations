@@ -38,7 +38,7 @@ gen y_hat3 = y_hat^3
 * Ramsey RESET
 reg u_hat y_hat2 y_hat3
 
-* Breusch-Pagan test (high p-value: no heteroskedasticity)
+* Breusch-Pagan test (low p-value: reject null -> evidence for heteroskedasticity)
 hettest 
 
 * White test 
